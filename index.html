@@ -1,1 +1,395 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks Grading System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+            min-height: 100vh;
+            padding: 40px 15px;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background-color: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1d4ed8;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            min-width: 140px;
+            color: #334155;
+        }
+
+        input {
+            border: 1px solid #cbd5e1;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
+        input[type="number"] {
+            width: 65px;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-container {
+            max-width: 650px;
+            margin: 25px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .result-container h2 {
+            color: #1d4ed8;
+            margin-bottom: 20px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin: 12px 0;
+            color: #334155;
+        }
+
+        .percentage {
+            font-size: 28px !important;
+            font-weight: bold;
+            color: #2563eb !important;
+        }
+
+        .student-name {
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+
+        .grade {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .result-container[hidden] {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            .form-group {
+                gap: 8px;
+            }
+
+            .form-group label {
+                min-width: 110px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .result-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Marks Grading</h1>
+
+        <form id="marksForm">
+
+            <div class="form-group">
+                <label for="name">Student Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Mathematics:</label>
+                <input type="number" name="m1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="m2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>Physics:</label>
+                <input type="number" name="p1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="p2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>English:</label>
+                <input type="number" name="e1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="e2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>PHP:</label>
+                <input type="number" name="h1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="h2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>JavaScript:</label>
+                <input type="number" name="j1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="j2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>FOP:</label>
+                <input type="number" name="f1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="f2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>WUI:</label>
+                <input type="number" name="w1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="w2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>Database:</label>
+                <input type="number" name="d1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="d2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>Networks:</label>
+                <input type="number" name="n1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="n2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>Embedded Systems:</label>
+                <input type="number" name="b1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="b2" min="0" placeholder="100">
+            </div>
+
+            <div class="form-group">
+                <label>Computer Basics:</label>
+                <input type="number" name="t1" min="0" placeholder="0">
+                <label>/</label>
+                <input type="number" name="t2" min="0" placeholder="100">
+            </div>
+
+            <button type="submit">Check Your Grades</button>
+
+        </form>
+
+    </div>
+
+    <!-- Result section -->
+
+    <div class="result-container" id="resultBox" hidden>
+
+        <h2>Student Results</h2>
+
+        <p>
+            Hello,
+            <span class="student-name" id="studentName"></span>!
+        </p>
+
+        <p>Total Marks:</p>
+
+        <p>
+            <strong id="totalMarks"></strong>
+        </p>
+
+        <p class="percentage" id="percentage"></p>
+
+        <div class="grade" id="grade"></div>
+
+    </div>
+
+    <script>
+
+        const form = document.getElementById("marksForm");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+
+            const subjects = [
+                ["m1", "m2"],
+                ["p1", "p2"],
+                ["e1", "e2"],
+                ["h1", "h2"],
+                ["j1", "j2"],
+                ["f1", "f2"],
+                ["w1", "w2"],
+                ["d1", "d2"],
+                ["n1", "n2"],
+                ["b1", "b2"],
+                ["t1", "t2"]
+            ];
+
+            let result = 0;
+            let result2 = 0;
+
+            for (let subject of subjects) {
+
+                let obtained = document.querySelector(
+                    `[name="${subject[0]}"]`
+                ).value;
+
+                let maximum = document.querySelector(
+                    `[name="${subject[1]}"]`
+                ).value;
+
+                obtained = obtained === "" ? 0 : Number(obtained);
+                maximum = maximum === "" ? 0 : Number(maximum);
+
+                if (
+                    !Number.isFinite(obtained) ||
+                    !Number.isFinite(maximum) ||
+                    obtained < 0 ||
+                    maximum < 0
+                ) {
+                    alert("Please enter valid marks.");
+                    return;
+                }
+
+                if (obtained > maximum) {
+                    alert("Obtained marks cannot exceed maximum marks.");
+                    return;
+                }
+
+                result += obtained;
+                result2 += maximum;
+            }
+
+            let percentage = 0;
+
+            if (result2 > 0) {
+                percentage = (result / result2) * 100;
+            }
+
+            let grade;
+
+            if (percentage >= 80) {
+                grade = "Excellent";
+            } else if (percentage >= 70) {
+                grade = "Very Good";
+            } else if (percentage >= 60) {
+                grade = "Good";
+            } else if (percentage >= 50) {
+                grade = "Fair";
+            } else {
+                grade = "Needs Improvement";
+            }
+
+            document.getElementById("studentName").textContent = name;
+
+            document.getElementById("totalMarks").textContent =
+                result + " / " + result2;
+
+            document.getElementById("percentage").textContent =
+                percentage.toFixed(2) + "%";
+
+            document.getElementById("grade").textContent = grade;
+
+            document.getElementById("resultBox").hidden = false;
+
+            document.getElementById("resultBox").scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
